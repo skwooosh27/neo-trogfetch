@@ -1,5 +1,6 @@
+//Copyright or something 8.5.26
 #!/usr/bin/bash
-
+//Figure out how the ascii thing works...
 arch=$(lscpu | grep -w "Architecture:" | cut -c14-)
 
 if [ $arch = aarch64 ]; then
