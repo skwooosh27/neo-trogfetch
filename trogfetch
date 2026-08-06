@@ -1,6 +1,11 @@
 //Copyright or something 8.5.26
 #!/usr/bin/bash
 //Figure out how the ascii thing works...
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+
 arch=$(lscpu | grep -w "Architecture:" | cut -c14-)
 
 if [ $arch = aarch64 ]; then
@@ -22,7 +27,7 @@ else
 fi
 
 echo
-echo "---- General ----"
+echo "${bold}---- General ----${normal}"
 echo -e 'Name\t| ' $(hostname)
 echo -e 'Distro\t| ' $(grep -w 'PRETTY_NAME=' /etc/os-release | cut -c13- | tr -d '""' )
 echo -e 'Kernal\t| ' $(uname -rs)
@@ -59,4 +64,5 @@ echo
 echo "---- Swap ----"
 echo -e 'Swap\t| ' $(free -h | grep "Swap:" | cut -c6- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f2)"B"
 echo -e 'Free\t| ' $(free -h | grep "Swap:" | cut -c6- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f4)"B"
-echo
+echo 
+echo "---- Disk
