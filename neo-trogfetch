@@ -34,8 +34,9 @@ echo -e 'Kernal\t| ' $(uname -rs)
 echo -e 'Uptime\t| ' $(uptime -p | cut -c3-)
 echo -e 'Mobo\t| ' $mobo
 echo -e 'IPv4\t| ' $(hostname -i  | cut -d " " -f3)
+echo -e 'IPv6\t| ' $(hostname -i  | cut -d " " -f3)
 echo
-echo -e "---- CPU ----"
+echo -e "${bold}---- CPU ----${normal}"
 echo -e 'Model\t| ' $(lscpu | grep -w "Model name:" | cut -c12-)
 echo -e 'Brand\t| ' $(lscpu | grep -w "Vendor ID:" | cut -c11-)
 echo -e 'Arch\t| ' $arch
@@ -44,7 +45,7 @@ echo -e 'Speed\t| ' $(lscpu | grep -w "CPU max MHz" | cut -c13- | cut -d "." -f1
 echo -e 'Cores\t| ' $cores
 echo -e 'Threads\t| ' $(($threads*$cores)) 
 echo
-echo "---- GPU ----"
+echo "${bold}---- GPU ----${normal}"
 
 if [ $(echo $model | wc -c) -gt 1 ]; then 
 	echo -e 'GPU\t| ' $model
@@ -56,13 +57,13 @@ else
 	echo
 fi
 
-echo "---- RAM ----"
+echo "${bold}---- RAM ----${normal}"
 echo -e 'Memory\t| ' $(free -h | grep "Mem:" | cut -c5- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f2)"B"
 echo -e 'Used\t| ' $(free -h | grep "Mem:" | cut -c5- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f3)"B"
 echo -e 'Free\t| ' $(free -h | grep "Mem:" | cut -c5- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f4)"B"
 echo
-echo "---- Swap ----"
+echo "${bold}---- Swap ----${normal}"
 echo -e 'Swap\t| ' $(free -h | grep "Swap:" | cut -c6- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f2)"B"
 echo -e 'Free\t| ' $(free -h | grep "Swap:" | cut -c6- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f4)"B"
 echo 
-echo "---- Disk
+echo "${bold}---- Disk ----${normal}"
