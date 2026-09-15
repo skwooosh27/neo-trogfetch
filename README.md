@@ -1,2 +1,3 @@
 Its just trogfetch with a bit more info plus ascii. 
 This is more so a personal project than something actually worth using...
+Use the original here: https://github.com/jfish871/trogfetch
