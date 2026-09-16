@@ -2,6 +2,7 @@
 #!/usr/bin/bash
 //Figure out how the ascii thing works...
 
+//fancy text initialization
 bold=$(tput bold)
 normal=$(tput sgr0)
 magenta=$(tput setaf 5)
@@ -10,6 +11,7 @@ yellow=$(tput setaf 11)
 pink=$(tput setaf 206)
 lightblue=$(tput setaf 33)
 green=$(tput setaf 2)
+
 
 arch=$(lscpu | grep -w "Architecture:" | cut -c14-)
 
@@ -31,9 +33,10 @@ else
 
 fi
 
+//the part that actually displays the info
 echo
 echo "${bold}${magenta}---- General ----${normal}"
-echo -e '${bold}Name${normal}\t| ' $(hostname)
+echo -e 'Name\t| ' $(hostname)
 echo -e 'Distro\t| ' $(grep -w 'PRETTY_NAME=' /etc/os-release | cut -c13- | tr -d '""' )
 echo -e 'Kernal\t| ' $(uname -rs)
 echo -e 'Uptime\t| ' $(uptime -p | cut -c3-)
@@ -73,15 +76,14 @@ echo
 
 if [ "$(uname -s)" = "Linux" ];
 then
-	echo "${bold}${lightblue}---- Disk (\) ----${normal}"
-	df -h --output=target,size,used,avail -x tmpfs -x devtmpfs -x squashfs -x overlay | tail -n +2 | grep -v '^/boot' |
+	echo "${bold}${lightblue}---- Disk ----${normal}"
+	df -h --output=target,size,used,avail -x tmpfs -x devtmpfs -x squashfs -x overlay |-x efivarfs  tail -n +2 | grep -v '^/boot' |
 	while read -r mount total used free
 	do
 		if [ "mount" != "\" ]
 		then
 			echo "${bold}${lightblue}${mount}${normal}"
 		fi
-		echo "${bold}${}${mount}${normal}"
 		echo -e 'Total\t| '"${total}B"
 		echo -e 'Used\t| '"${used}B"
 		echo -e 'Free\t| '"${free}B"
