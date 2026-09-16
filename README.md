@@ -1,4 +1,4 @@
-A simple but detailed neofetch clone written in bash. Plans to add the ascii logo later
+A simple but detailed neofetch clone written in bash. Plans to add the ascii logo later <br>
 Notable features include extra details regarding motherboard and CPU. 
 
 This is more so a personal project than something actually worth using... <br>
