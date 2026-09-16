@@ -87,10 +87,9 @@ then
 		echo -e 'Total\t| '"${total}B"
 		echo -e 'Used\t| '"${used}B"
 		echo -e 'Free\t| '"${free}B"
-		echo
 	done
 fi
-echo
+ech
 echo "${bold}${green}---- Network ----${normal}"
 echo -e 'IPv4\t| ' $(hostname -i  | cut -d " " -f3)
 echo -e 'IPv6\t| ' $(hostname -i  | cut -d " " -f3)
