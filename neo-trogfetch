@@ -5,6 +5,11 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 magenta=$(tput setaf 5)
+orange=$(tput setaf 202)
+yellow=$(tput setaf 11)
+pink=$(tput setaf 206)
+lightblue=$(tput setaf 33)
+green=$(tput setaf 2)
 
 arch=$(lscpu | grep -w "Architecture:" | cut -c14-)
 
@@ -28,14 +33,14 @@ fi
 
 echo
 echo "${bold}${magenta}---- General ----${normal}"
-echo -e 'Name\t| ' $(hostname)
+echo -e '${bold}Name${normal}\t| ' $(hostname)
 echo -e 'Distro\t| ' $(grep -w 'PRETTY_NAME=' /etc/os-release | cut -c13- | tr -d '""' )
 echo -e 'Kernal\t| ' $(uname -rs)
 echo -e 'Uptime\t| ' $(uptime -p | cut -c3-)
 echo -e 'Mboard\t| ' $mobo
 
 echo
-echo -e "${bold}---- CPU ----${normal}"
+echo -e "${bold}${orange}---- CPU ----${normal}"
 echo -e 'Model\t| ' $(lscpu | grep -w "Model name:" | cut -c12-)
 echo -e 'Brand\t| ' $(lscpu | grep -w "Vendor ID:" | cut -c11-)
 echo -e 'Arch\t| ' $arch
@@ -44,7 +49,7 @@ echo -e 'Speed\t| ' $(lscpu | grep -w "CPU max MHz" | cut -c13- | cut -d "." -f1
 echo -e 'Cores\t| ' $cores
 echo -e 'Threads\t| ' $(($threads*$cores)) 
 echo
-echo "${bold}---- GPU ----${normal}"
+echo "${bold}${yellow}---- GPU ----${normal}"
 
 if [ $(echo $model | wc -c) -gt 1 ]; then 
 	echo -e 'GPU\t| ' $model
@@ -56,22 +61,26 @@ else
 	echo
 fi
 
-echo "${bold}---- RAM ----${normal}"
+echo "${bold}${pink}---- RAM ----${normal}"
 echo -e 'Memory\t| ' $(free -h | grep "Mem:" | cut -c5- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f2)"B"
 echo -e 'Used\t| ' $(free -h | grep "Mem:" | cut -c5- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f3)"B"
 echo -e 'Free\t| ' $(free -h | grep "Mem:" | cut -c5- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f4)"B"
 echo
-echo "${bold}---- Swap ----${normal}"
+echo "${bold}${lightblue}---- Swap ----${normal}"
 echo -e 'Swap\t| ' $(free -h | grep "Swap:" | cut -c6- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f2)"B"
 echo -e 'Free\t| ' $(free -h | grep "Swap:" | cut -c6- | tr -s [:blank:] | tr ' ' ':'  | cut -d ':' -f4)"B"
+echo
 
 if [ "$(uname -s)" = "Linux" ];
 then
-	echo "${bold}---- Disk (\) ----${normal}"
-	df -h --output=target,size,used,avail -x tmpfs -x devtmpfs -x squashfs -x overlay | tail -n +2 |
+	echo "${bold}${}---- Disk (\) ----${normal}"
+	df -h --output=target,size,used,avail -x tmpfs -x devtmpfs -x squashfs -x overlay | tail -n +2 | grep -v '^/boot' |
 	while read -r mount total used free
 	do
-		echo "${bold}${mount}${normal}"
+		if [ "mount" != "\" ]
+		then
+			echo "${bold}${
+		echo "${bold}${}${mount}${normal}"
 		echo -e 'Total\t| '"${total}B"
 		echo -e 'Used\t| '"${used}B"
 		echo -e 'Free\t| '"${free}B"
@@ -79,7 +88,7 @@ then
 	done
 fi
 
-echo "${bold}---- Network ----${normal}"
+echo "${bold}${green}---- Network ----${normal}"
 echo -e 'IPv4\t| ' $(hostname -i  | cut -d " " -f3)
 echo -e 'IPv6\t| ' $(hostname -i  | cut -d " " -f3)
 echo
