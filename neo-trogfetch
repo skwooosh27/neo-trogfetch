@@ -73,13 +73,14 @@ echo
 
 if [ "$(uname -s)" = "Linux" ];
 then
-	echo "${bold}${}---- Disk (\) ----${normal}"
+	echo "${bold}${lightblue}---- Disk (\) ----${normal}"
 	df -h --output=target,size,used,avail -x tmpfs -x devtmpfs -x squashfs -x overlay | tail -n +2 | grep -v '^/boot' |
 	while read -r mount total used free
 	do
 		if [ "mount" != "\" ]
 		then
-			echo "${bold}${
+			echo "${bold}${lightblue}${mount}${normal}"
+		fi
 		echo "${bold}${}${mount}${normal}"
 		echo -e 'Total\t| '"${total}B"
 		echo -e 'Used\t| '"${used}B"
@@ -87,7 +88,7 @@ then
 		echo
 	done
 fi
-
+echo
 echo "${bold}${green}---- Network ----${normal}"
 echo -e 'IPv4\t| ' $(hostname -i  | cut -d " " -f3)
 echo -e 'IPv6\t| ' $(hostname -i  | cut -d " " -f3)
