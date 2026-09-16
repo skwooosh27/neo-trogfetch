@@ -1,5 +1,7 @@
 A simple but detailed neofetch clone written in bash. Plans to add the ascii logo later <br>
-Notable features include extra details regarding motherboard and CPU. 
+Notable features include extra details regarding motherboard and CPU. <br>
+
+To use, simply open the file in your terminal, type `chmod +x neo-trogfetch` then run with `./neo-trogfetch`. Simple right? 
 
 This is more so a personal project than something actually worth using... <br>
 This is a fork of trogfetch which you can get here: https://github.com/jfish871/trogfetch <br>
