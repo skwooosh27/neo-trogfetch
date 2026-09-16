@@ -1,8 +1,8 @@
-//Copyright Skwooosh27 9.15.26
+#Copyright Skwooosh27 9.15.26
 #!/usr/bin/bash
-//Figure out how the ascii thing works...
+#Figure out how the ascii thing works...
 
-//fancy text initialization
+#fancy text initialization
 bold=$(tput bold)
 normal=$(tput sgr0)
 magenta=$(tput setaf 5)
@@ -33,7 +33,7 @@ else
 
 fi
 
-//the part that actually displays the info
+#the part that actually displays the info
 echo
 echo "${bold}${magenta}---- General ----${normal}"
 echo -e 'Name\t| ' $(hostname)
@@ -76,11 +76,11 @@ echo
 
 if [ "$(uname -s)" = "Linux" ];
 then
-	echo "${bold}${lightblue}---- Disk ----${normal}"
-	df -h --output=target,size,used,avail -x tmpfs -x devtmpfs -x squashfs -x overlay |-x efivarfs  tail -n +2 | grep -v '^/boot' |
+	echo "${bold}${lightblue}---- Disk(s) ----${normal}"
+	df -h --output=target,size,used,avail -x tmpfs -x devtmpfs -x squashfs -x overlay -x efivarfs |  tail -n +2 | grep -v '^/boot' |
 	while read -r mount total used free
 	do
-		if [ "mount" != "\" ]
+		if [ "mount" != "/" ]
 		then
 			echo "${bold}${lightblue}${mount}${normal}"
 		fi
